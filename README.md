@@ -22,7 +22,7 @@ dataset used in the paper. The datasets include:
 - ```dataset.jsonl``` containing:
     - Web links to the news texts
     - Web links to the news image
-    - Outputs of the named entity linking and disambiguation (NERD) approach
+    - Outputs of the named entity recognition and disambiguation (NERD) approach
     - Untampered and tampered entities
 - ```<entity>.jsonl``` file for each entity type containing the following information for each entity:
     - Wikidata ID
