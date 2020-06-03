@@ -7,10 +7,17 @@ Accepted for publication in: *International Conference on Multimedia Retrieval (
 
 ## News
 
-**3rd June 2020:** We uploaded a **pre-release** of the *TamperedNews* and *News400* dataset with links to news texts, 
-news images, and reference images. In addition, we provide the splits for validation and testing including the sets of 
-untampered and tampered entities for each document. We are currently working on a script to download the news texts and 
-images as well as the source code to reproduce our results. 
+**3rd June 2020:** We have uploaded a **pre-release** of the *TamperedNews* and *News400* dataset with links to news 
+texts, news images, untampered and tampered entity sets, and reference images for all entities. In addition, we have 
+provided the splits for validation and testing. 
+
+**3rd June 2020:** Added download script for news texts. 
+
+We are currently working on a script that automatically downloads the news and reference images. We will also provide 
+the source code and data to reproduce our results. This includes:
+- Functions to extract visual and textual features
+- Extracted embeddings used in our paper
+- Inference script including the evaluation metrics
 
 ## Content
 
@@ -29,6 +36,31 @@ dataset used in the paper. The datasets include:
     - Wikidata label
     - Meta information used for tampering
     - Web links to all reference images crawled from Google, Bing, and Wikidata
+- splits for testing and validation
+- ```download_news_text.py``` to download news texts from the urls provided in ```dataset.jsonl```
+
+## Usage
+
+### Download News Texts
+
+To download the text in the news articles run: 
+
+```shell script
+python download_news_text.py \
+  -input <PATH/TO/dataset.jsonl> 
+  -output <PATH/TO/OUTPUT/DIRECTORY> 
+  -dataset <DATASET=[TamperedNews, News400]>
+``` 
+
+**Additional parameters:** Run the script with ```--debug``` to enable debugging console outputs.
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+**Outputs:** This step stores a variety of meta information for each article with an ID ```document_ID``` in a file: 
+```<document_id>.json```. In addition, the news texts are stored along with all other dataset information in a new 
+file: ```dataset_with_text.jsonl```.
+
+**Tip:** The script checks whether an article has already been crawled. We recommend to run the script several times 
+as some documents might be missing due to timeouts.
 
 ## LICENSE
 
