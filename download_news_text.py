@@ -24,7 +24,7 @@ def parse_args():
                         choices=["News400", "TamperedNews"],
                         help="select dataset to process")
 
-    parser.add_argument("-t", "--threads", default=32, required=False, help="number of downloader threads")
+    parser.add_argument("-t", "--threads", default=8, required=False, help="number of downloader threads")
 
     args = parser.parse_args()
     return args
@@ -34,7 +34,7 @@ def download_news_text(args):
     outfile, url, language = args
 
     if os.path.isfile(outfile):
-        logging.info(f"Text from already processed: {url}")
+        logging.info(f"Text already processed: {url}")
         return
 
     logging.info(f"Downloading text from: {url}")
@@ -111,18 +111,24 @@ def main():
     with multiprocessing.Pool(args.threads) as p:
         p.map(download_news_text, news_urls)
 
-    # store texts in dataset_full.jsonl
+    # store dataset with news texts
+    logging.info("store dataset with news texts")
     with open(os.path.splitext(args.input)[0] + "_with_text.jsonl", "w") as f:
         for doc in dataset.values():
             txt_file = os.path.join(args.output, doc["id"] + ".json")
 
             if not os.path.exists(txt_file):
+                f.write(json.dumps(doc) + "\n")
                 continue
 
             # meta information
-            doc_with_text = {"id": doc["id"], "url": doc["url"], "image_url": doc["image_url"]}
+            doc_with_text = {}
 
-            # title, text, caption
+            for key in ["id", "url", "image_url"]:
+                if key in doc:
+                    doc_with_text[key] = doc[key]
+
+            # get title and text
             with open(txt_file, "r") as jsonfile:
                 data = json.load(jsonfile)
                 doc_with_text["title"] = data["title"]
@@ -131,21 +137,28 @@ def main():
                     # NOTE: News400 texts were postprocessed in our project
                     with open(os.path.splitext(txt_file)[0] + '_text.txt', 'r') as txt_file:
                         news_text = txt_file.read()
-                    doc_with_text["text"] = utils.postprocess_text(news_text)
+                    news_text = utils.postprocess_text(news_text)
 
                 else:  # TamperedNews
-                    doc_with_text["text"] = data["text"]
+                    news_text = data["text"]
+
+                # NOTE: some domains contain copyright holders and image caption at the beginning of the text block
+                _, _, news_text = utils.find_news_text(news_text)
+                doc_with_text["text"] = news_text
 
             # NERD outputs
+            for key in ["text_persons", "text_locations", "text_events"]:
+                if key in doc:
+                    doc_with_text[key] = doc[key]
+
             doc_with_text["text_persons"] = doc["text_persons"]
             doc_with_text["text_locations"] = doc["text_locations"]
             doc_with_text["text_events"] = doc["text_events"]
 
             # Untampered and tampered entity sets
-            doc_with_text["test_context"] = doc["test_context"]
-            doc_with_text["test_persons"] = doc["test_persons"]
-            doc_with_text["test_locations"] = doc["test_locations"]
-            doc_with_text["test_events"] = doc["test_events"]
+            for key in ["test_context", "test_persons", "test_locations", "test_events"]:
+                if key in doc:
+                    doc_with_text[key] = doc[key]
 
             f.write(json.dumps(doc_with_text) + "\n")
 
