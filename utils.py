@@ -34,7 +34,7 @@ def read_jsonl(path, dict_key=None, keep_keys=None):
 def postprocess_text(text):
     while True:
         # Undo mistakes while removing whitespaces
-        result = re.search(r'^(.*?)([\.\?\!\"\'“„])([A-Z\"\'“„])(.*?)$', text, re.DOTALL)
+        result = re.search(r'^(.*?)([\.\?\!\"\'������])([A-Z\"\'������])(.*?)$', text, re.DOTALL)
         if result:
             text = result.group(1) + result.group(2) + ' ' + result.group(3) + result.group(4)
         else:
@@ -48,3 +48,14 @@ def postprocess_text(text):
             break
 
     return text
+
+
+def find_news_text(text):
+    results = re.match(r'^Image copyright (.*?) Image caption (.*?)\n\n(.*?)$', text, re.DOTALL)
+    if results:
+        image_copyright_by = results.group(1)
+        image_caption = results.group(2)
+        text = results.group(3)
+        return image_copyright_by, image_caption, text
+    else:
+        return '', '', text
