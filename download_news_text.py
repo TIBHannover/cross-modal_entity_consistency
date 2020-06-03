@@ -105,7 +105,7 @@ def main():
     dataset = utils.read_jsonl(args.input, dict_key="id")
     news_urls = []
     for doc in dataset.values():
-        news_urls.append([os.path.join(args.output, doc["id"] + ".json"), doc["url"]["url"], language])
+        news_urls.append([os.path.join(args.output, doc["id"] + ".json"), doc["url"], language])
 
     # download texts
     with multiprocessing.Pool(args.threads) as p:
