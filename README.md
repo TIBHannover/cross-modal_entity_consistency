@@ -21,6 +21,8 @@ paper
 - **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context 
 and entity verification. 
 - **Word embedding class** to generate textual features
+
+### 5th June 2020:
 - **Download script** that automatically generates the whole dataset with the intended project structure
 
 ### Future Releases
