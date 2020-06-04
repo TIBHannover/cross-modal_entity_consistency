@@ -15,7 +15,8 @@ tampered entity sets, and reference images for all entities.
 - **Download script** to crawl news texts
 
 ### 4th June 2020:
-- **Full release** of the *TamperedNews* and *News400* dataset including the visual and textual features used in the 
+- **Full release** of the [*TamperedNews*]((https://doi.org/10.25835/0002244)) and 
+[*News400*](https://doi.org/10.25835/0084897) dataset including the visual and textual features used in the 
 paper
 - **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context 
 and entity verification. 
@@ -81,13 +82,23 @@ file: ```dataset_with_text.jsonl```.
 **Tip:** The script checks whether an article has already been crawled. We recommend to run the script several times 
 as some documents might be missing due to timeouts.
 
+### Cross-modal Entity Consistency
+
+This step requires to download all features and word embeddings provided in the dataset. The features are stored in a 
+folder called ```resources``` after running ```download_dataset.py``` (script will be available soon). In case you have 
+modified the dataset paths, please specify the correct paths to the features, splits, etc. in the corresponding 
+config files.
+
 ### Context Verification
 
-This step requires to download all features and word embeddings provided in the dataset.
+If you haven't exectured ```download_dataset.py``` (script will be available soon), it is required to download the 
+fastText models for [English](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.bin.gz) or 
+[German](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.de.300.bin.gz) for *TamperedNews* and *News400*, 
+respectively. Put both models in the same folder ```fasttext_folder```
 
 To reprocude the results for context verification, please run:
 ```shell script
-python inference_context.py --config test_yml/<dataset_name>_context.yml
+python inference_context.py --config test_yml/<dataset_name>_context.yml --fasttext <PATH/TO/fasttext_folder>
 ```
 The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
