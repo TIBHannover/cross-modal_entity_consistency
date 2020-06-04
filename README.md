@@ -7,37 +7,56 @@ Accepted for publication in: *International Conference on Multimedia Retrieval (
 
 ## News
 
-**3rd June 2020:** We have uploaded a **pre-release** of the *TamperedNews* and *News400* dataset with links to news 
-texts, news images, untampered and tampered entity sets, and reference images for all entities. In addition, we have 
-provided the splits for validation and testing. 
+###3rd June 2020: 
 
-**3rd June 2020:** Added download script for news texts. 
+- **Pre-release** of the *TamperedNews* and *News400* dataset with links to news texts, news images, untampered and 
+tampered entity sets, and reference images for all entities. 
+- **Splits** for validation and testing
+- **Download script** to crawl news texts
 
-We are currently working on a script that automatically downloads the news and reference images. We will also provide 
-the source code and data to reproduce our results. This includes:
-- Functions to extract visual and textual features
-- Extracted embeddings used in our paper
-- Inference script including the evaluation metrics
+###4th June 2020:
+- **Full release** of the *TamperedNews* and *News400* dataset including the visual and textual features used in the 
+paper
+- **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context 
+and entity verification. 
+- **Word embedding class** to generate textual features
+
+###Future Releases
+- **Docker container** with required python libraries
+- **Download script** that automatically generates the whole dataset with the intended project structure
+- **Web-crawler** to obtain the news and reference images. 
+- Source code for **visual feature extraction**
 
 ## Content
 
-This repository contains a **pre-release** of the 
-*TamperedNews* ([Link](https://github.com/TIBHannover/cross-modal_entity_consistency/releases/download/0.1/tamperednews.tar.gz)) 
-and *News400* ([Link](https://github.com/TIBHannover/cross-modal_entity_consistency/releases/download/0.1/news400.tar.gz)) 
-dataset used in the paper. The datasets include:
+This repository contains links to the *TamperedNews* ([Link](https://doi.org/10.25835/0002244)) and 
+*News400* ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets include:
 
-- ```dataset.jsonl``` containing:
-    - Web links to the news texts
-    - Web links to the news image
-    - Outputs of the named entity recognition and disambiguation (NERD) approach
-    - Untampered and tampered entities
-- ```<entity>.jsonl``` file for each entity type containing the following information for each entity:
-    - Wikidata ID
-    - Wikidata label
-    - Meta information used for tampering
-    - Web links to all reference images crawled from Google, Bing, and Wikidata
-- splits for testing and validation
-- ```download_news_text.py``` to download news texts from the urls provided in ```dataset.jsonl```
+- **```<datasetname>```.tar.gz**:
+    - ```dataset.jsonl``` containing:
+        - Web links to the news texts
+        - Web links to the news image
+        - Outputs of the named entity recognition and disambiguation (NERD) approach
+        - Untampered and tampered entities
+    - ```entity_type.jsonl``` file for each entity type containing the following information for each entity:
+        - Wikidata ID
+        - Wikidata label
+        - Meta information used for tampering
+        - Web links to all reference images crawled from Google, Bing, and Wikidata
+    - splits for testing and validation
+- **```<datasetname>```_features.tar.gz**:
+    - Visual features of the news images for persons, locations, and scenes
+    - Visual features of the reference images for persons, locations, and scenes
+- **```<datasetname>```_wordembeddings.tar.gz**: Word embeddings of all nouns in the news texts
+
+Based on the dataset we provide source code and config files the reproduce our results:
+
+- [inference_context.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/inference_context.py)
+  to reproduce the results for context verification
+- [inference_entities.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/inference_entities.py)
+  to reproduce the results for person, location, and event verification
+- [Config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml) including the
+  parameters used for the experiments in the paper
 
 ## Usage
 
