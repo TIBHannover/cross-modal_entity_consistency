@@ -1,0 +1,10 @@
+# relative paths to files provided in our dataset
+dataset: resources/news400/dataset.jsonl
+split: resources/news400/splits/events_100perc_test.csv
+features:
+  news_features: resources/news400/features/news_scene_classification.h5
+  untampered_reference_features: resources/news400/features/reference_scene_classification.h5
+  tampered_reference_features: resources/tamperednews/features/reference_scene_classification.h5  # entities from tamperednews
+num_images: 10     # maximum number of images per engine
+clustering: false  # clustering on features of reference images
+operator: max      # operator [max, q75, q90, q95] to calculate cross-modal entity similarities (Sections 3.3 & 4.3, Table 2)

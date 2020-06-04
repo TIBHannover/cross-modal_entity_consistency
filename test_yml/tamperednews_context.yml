@@ -1,0 +1,8 @@
+# relative paths to files provided in our dataset
+dataset: resources/tamperednews/dataset.jsonl
+split: resources/tamperednews/splits/context_50perc_test.csv
+scene_labels: scene_labels/places365_en.txt
+features:
+  scene_logits: resources/tamperednews/features/news_scene_logits.h5
+  word_embeddings: resources/tamperednews/wordembeddings/word_embeddings_nouns.h5
+operator: max  # operator [max, q75, q90, q95] to calculate cross-modal entity similarities (Sections 3.3 & 4.3, Table 2)
