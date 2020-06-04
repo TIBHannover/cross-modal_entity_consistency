@@ -81,6 +81,25 @@ file: ```dataset_with_text.jsonl```.
 **Tip:** The script checks whether an article has already been crawled. We recommend to run the script several times 
 as some documents might be missing due to timeouts.
 
+### Context Verification
+
+This step requires to download all features and word embeddings provided in the dataset.
+
+To reprocude the results for context verification, please run:
+```shell script
+python inference_context.py --config test_yml/<dataset_name>_context.yml
+```
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+### Entity Verification
+
+To reprocude the results for entity verification for a given entity type, please run:
+```shell script
+python inference_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
+```
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+
 ## LICENSE
 
 This work is published under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007. For details please check the
