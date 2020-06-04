@@ -1,3 +1,4 @@
+import csv
 import json
 import re
 
@@ -29,6 +30,16 @@ def read_jsonl(path, dict_key=None, keep_keys=None):
         data = {xpath_get(x, dict_key): x for x in data}
 
     return data
+
+
+def read_split(fname):
+    test_doc_ids = set()
+    with open(fname) as csvfile:
+        content = csv.reader(csvfile)
+        for row in content:
+            test_doc_ids.add(row[0])
+
+    return test_doc_ids
 
 
 def postprocess_text(text):
