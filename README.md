@@ -7,21 +7,21 @@ Accepted for publication in: *International Conference on Multimedia Retrieval (
 
 ## News
 
-###3rd June 2020: 
+### 3rd June 2020: 
 
 - **Pre-release** of the *TamperedNews* and *News400* dataset with links to news texts, news images, untampered and 
 tampered entity sets, and reference images for all entities. 
 - **Splits** for validation and testing
 - **Download script** to crawl news texts
 
-###4th June 2020:
+### 4th June 2020:
 - **Full release** of the *TamperedNews* and *News400* dataset including the visual and textual features used in the 
 paper
 - **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context 
 and entity verification. 
 - **Word embedding class** to generate textual features
 
-###Future Releases
+### Future Releases
 - **Docker container** with required python libraries
 - **Download script** that automatically generates the whole dataset with the intended project structure
 - **Web-crawler** to obtain the news and reference images. 
