@@ -64,7 +64,7 @@ for url in urls:
     if not os.path.exists(os.path.dirname(out_path)):
         os.makedirs(os.path.dirname(out_path))
 
-    if os.path.isfile(out_path):
+    if os.path.isfile(out_path) or os.path.isfile(os.path.splitext(out_path)[0]):
         print(f'{fname} already exists.')
         continue
 
@@ -90,6 +90,11 @@ for url in urls:
 parts = []
 for fname in fnames:
     if fname.endswith("bin.gz"):  # fastText models
+        if os.path.isfile(os.path.splitext(fname)[0]):
+            print(f"{os.path.splitext(fname)[0]} already exists")
+            continue
+        print(f"gunzip {fname}")
+        os.system(f"gunzip {fname}")
         continue
 
     partname, ext = os.path.splitext(fname)
