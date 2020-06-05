@@ -5,6 +5,11 @@ This is the official GitHub page for the paper:
 "Multimodal Analytics for Real-world News using Measures of Cross-modal Entity Consistency".
 Accepted for publication in: *International Conference on Multimedia Retrieval (ICMR)*, Dublin, 2020.
 
+## Supplemental Material
+
+You can find the supplemental material here: 
+[supplemental_materia](https://github.com/TIBHannover/cross-modal_entity_consistency/tree/master/supplemental_material)
+
 ## News
 
 ### 3rd June 2020: 
@@ -64,12 +69,11 @@ Based on the dataset we provide source code and config files to reproduce our re
 
 ### Installation
 
-We have provided a Docker container for easy installation. Please run the following command to build the container:
+We have provided a Docker container to execute our code. You can build the container with:
 ```shell script
 docker build <PATH/TO/REPOSITORY> -t <DOCKER_NAME>
 ```
-
-You can start all scripts in this repository using:
+To run the container please use:
 ```shell script
 docker run \
   --volume <PATH/TO/REPOSITORY>:/src \
@@ -78,10 +82,9 @@ docker run \
 cd /src
 ```
 
-
 ### Build Dataset
 
-Please download and build the dataset using the script provided in this repository. Simply run:
+You can use the script provided in this repository to download and build the dataset: 
 ```shell script
 python build_dataset.py
 ```
@@ -90,7 +93,7 @@ following steps.
 
 ### Download News Texts
 
-To download the text in the news articles run: 
+The following command automatically downloads the text of the news articles: 
 
 ```shell script
 python download_news_text.py \
@@ -107,13 +110,16 @@ The number of parallel threads can be defined with: ```--threads <#THREADS>```
 file: ```dataset_with_text.jsonl```.
 
 **Tip:** The script checks whether an article has already been crawled. We recommend to run the script several times 
-as some documents might be missing due to timeouts.
+as some documents might be missing due to timeouts in earlier iterations.
+
+**Known Issues:** We are aware that some Websites have changed the news content or their overall template. For this 
+reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information.  
 
 ### Cross-modal Entity Consistency
 
-This step requires to download all features and word embeddings provided in the dataset. The features are stored in a 
-folder called ```resources``` after running ```build_dataset.py```. In case you have modified the dataset paths, 
-please specify the correct paths to the features, splits, etc. in the corresponding config files.
+This step requires to download all features and word embeddings provided in the dataset as described in 
+[Build Dataset](#Build-Dataset). In case you have modified the dataset paths, please specify the correct paths to the 
+features, splits, etc. in the corresponding [config files)().
 
 ### Entity Verification
 
