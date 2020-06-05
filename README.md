@@ -1,9 +1,12 @@
 # Multimodal Analytics for Real-world News using Measures of Cross-modal Entity Consistency
+
 This is the official GitHub page for the paper:
 
-> Eric Müller-Budack, Jonas Theiner, Sebastian Diering, Maximilian Idahl, Ralph Ewerth:
-"Multimodal Analytics for Real-world News using Measures of Cross-modal Entity Consistency".
-Accepted for publication in: *International Conference on Multimedia Retrieval (ICMR)*, Dublin, 2020.
+> Eric Müller-Budack, Jonas Theiner, Sebastian Diering, Maximilian Idahl, and Ralph Ewerth. 2020. 
+Multimodal Analytics for Real-world News usingMeasures of Cross-modal Entity Consistency. 
+In Proceedings of the *2020 International Conference on Multimedia Retrieval (ICMR ’20)*, 
+June 8–11, 2020, Dublin, Ireland. ACM, New York, NY, USA, 10 pages. 
+https://doi.org/10.1145/3372278.3390670
 
 ## Supplemental Material
 
