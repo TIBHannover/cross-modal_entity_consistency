@@ -29,10 +29,11 @@ and entity verification.
 ### 5th June 2020:
 - **Download script** that automatically generates the whole dataset with the intended project structure
 - **Docker container**
+- Source code for **textual feature extraction**
 
 ### Future Releases
-- **Web-crawler** to obtain the news and reference images.
-- Source code for **visual and textual feature extraction**
+- **Image crawler** to obtain the news and reference images.
+- Source code for **visual feature extraction**
 
 ## Content
 
@@ -115,11 +116,28 @@ as some documents might be missing due to timeouts in earlier iterations.
 **Known Issues:** We are aware that some Websites have changed the news content or their overall template. For this 
 reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information.  
 
+### Extraction of Textual Features
+
+If you haven't executed ```build_dataset.py```, it is required to download the *fastText* models for 
+[English](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.bin.gz) or 
+[German](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.de.300.bin.gz) for *TamperedNews* and *News400*, 
+respectively. Put both models in the same folder ```fasttext_folder```. The standard folder is ```resources/fasttext```
+
+You can extract the textual features of the news text using:
+
+```shell script
+python calculate_word_embeddings.py \
+  --dataset <PATH/TO/dataset_with_text.jsonl> \ 
+  --fasttext <PATH/TO/fasttext_folder> \
+  --output <PATH/TO/OUTPUTFILE.h5>
+``` 
+
 ### Cross-modal Entity Consistency
 
 This step requires to download all features and word embeddings provided in the dataset as described in 
 [Build Dataset](#Build-Dataset). In case you have modified the dataset paths, please specify the correct paths to the 
-features, splits, etc. in the corresponding [config files)().
+features, splits, etc. in the corresponding
+[config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml).
 
 ### Entity Verification
 
@@ -130,11 +148,6 @@ python inference_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
 The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 ### Context Verification
-
-If you haven't executed ```build_dataset.py```, it is required to download the *fastText* models for 
-[English](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.bin.gz) or 
-[German](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.de.300.bin.gz) for *TamperedNews* and *News400*, 
-respectively. Put both models in the same folder ```fasttext_folder```. The standard folder is ```resources/fasttext```
 
 To reproduce the results for context verification, please run:
 ```shell script
