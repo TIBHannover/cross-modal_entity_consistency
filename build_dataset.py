@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 
 cur_dir = os.path.dirname(__file__)
-out_dir = os.path.join(cur_dir, 'resources_dtest')
+out_dir = os.path.join(cur_dir, 'resources')
 
 base_url_news400 = "https://data.uni-hannover.de/dataset/c729ffd9-8be1-49a9-8c43-dab2f8a87753/resource/"
 base_url_tamperednews = "https://data.uni-hannover.de/dataset/074ca5d5-02ce-4b1e-b90b-a6c0f1dd92f5/resource/"
