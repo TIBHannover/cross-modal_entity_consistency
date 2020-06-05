@@ -20,15 +20,14 @@ tampered entity sets, and reference images for all entities.
 paper
 - **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context 
 and entity verification. 
-- **Word embedding class** to generate textual features
 
 ### 5th June 2020:
 - **Download script** that automatically generates the whole dataset with the intended project structure
+- **Docker container**
 
 ### Future Releases
-- **Docker container** with required python libraries
-- **Web-crawler** to obtain the news and reference images. 
-- Source code for **visual feature extraction**
+- **Web-crawler** to obtain the news and reference images.
+- Source code for **visual and textual feature extraction**
 
 ## Content
 
@@ -62,6 +61,23 @@ Based on the dataset we provide source code and config files to reproduce our re
   parameters used for the experiments in the paper
 
 ## Usage
+
+### Installation
+
+We have provided a Docker container for easy installation. Please run the following command to build the container:
+```shell script
+docker build <PATH/TO/REPOSITORY> -t <DOCKER_NAME>
+```
+
+You can start all scripts in this repository using:
+```shell script
+docker run \
+  --volume <PATH/TO/REPOSITORY>:/src \
+  -u $(id -u):$(id -g) \
+  -it <DOCKER_NAME> bash 
+cd /src
+```
+
 
 ### Build Dataset
 
