@@ -32,7 +32,6 @@ class WordEmbedder:
         tokens = self._preprocess(text)
         word_embeddings = []
         for token in tokens:
-            logging.debug(token)
             word_embeddings.append(self._word2vec.get_word_vector(token))
 
         if len(word_embeddings) == 0:
