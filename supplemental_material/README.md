@@ -1,4 +1,4 @@
-# Supplemental Material for ICMR20 Submission 120
+# Supplemental Material
 
 ## Multimodal Analytics for Real-world News using Measures of Cross-modal Entity Consistency
 

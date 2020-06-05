@@ -8,7 +8,7 @@ Accepted for publication in: *International Conference on Multimedia Retrieval (
 ## Supplemental Material
 
 You can find the supplemental material here: 
-[supplemental_materia](https://github.com/TIBHannover/cross-modal_entity_consistency/tree/master/supplemental_material)
+[supplemental_material](https://github.com/TIBHannover/cross-modal_entity_consistency/tree/master/supplemental_material)
 
 ## News
 
