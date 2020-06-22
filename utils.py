@@ -45,7 +45,7 @@ def read_split(fname):
 def postprocess_text(text):
     while True:
         # Undo mistakes while removing whitespaces
-        result = re.search(r'^(.*?)([\.\?\!\"\'������])([A-Z\"\'������])(.*?)$', text, re.DOTALL)
+        result = re.search(r'^(.*?)([\.\?\!\"\'“„])([A-Z\"\'“„])(.*?)$', text, re.DOTALL)
         if result:
             text = result.group(1) + result.group(2) + ' ' + result.group(3) + result.group(4)
         else:
