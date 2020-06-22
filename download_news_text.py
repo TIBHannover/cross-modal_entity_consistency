@@ -24,7 +24,7 @@ def parse_args():
                         choices=["News400", "TamperedNews"],
                         help="select dataset to process")
 
-    parser.add_argument("-t", "--threads", default=8, required=False, help="number of downloader threads")
+    parser.add_argument("-t", "--threads", type=int, default=8, required=False, help="number of downloader threads")
 
     args = parser.parse_args()
     return args
