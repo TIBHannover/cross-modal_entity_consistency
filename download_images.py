@@ -1,9 +1,11 @@
 import argparse
 import cv2
+import imghdr
 import logging
 import multiprocessing
 import numpy as np
 import os
+import shutil
 import sys
 import time
 import urllib.request
@@ -60,6 +62,11 @@ def download_news_images(args):
                     img = cv2.resize(img, (int(img.shape[1] / scale + 0.5), int(img.shape[0] / scale + 0.5)))
 
             cv2.imwrite(outfile, img)
+            image_type = imghdr.what(outfile)
+            if image_type == 'webp':
+                fname, ext = os.path.splitext(outfile)
+                shutil.move(outfile, fname + '.webp')
+
             return True
     except urllib.error.HTTPError as err:
         logging.error(str(err.reason))
