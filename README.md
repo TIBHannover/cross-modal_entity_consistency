@@ -130,8 +130,7 @@ in the dataset:
 python download_images.py \
   --input <PATH/TO/INPUT.jsonl> 
   --output <PATH/TO/OUTPUT/DIRECTORY> 
-  --type [news, entity]
-  -dataset <DATASET=[TamperedNews, News400]>
+  --type <TYPE=[news, entity]>
 ``` 
 
 **Additional parameters:** Run the script with ```--debug``` to enable debugging console outputs.
