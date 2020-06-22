@@ -34,8 +34,10 @@ and entity verification.
 - **Docker container**
 - Source code for **textual feature extraction**
 
-### Future Releases
+### 22th June 2020:
 - **Image crawler** to obtain the news and reference images.
+
+### Future Releases
 - Source code for **visual feature extraction**
 
 ## Content
@@ -49,7 +51,7 @@ This repository contains links to the *TamperedNews* ([Link](https://doi.org/10.
         - Web links to the news image
         - Outputs of the named entity recognition and disambiguation (NERD) approach
         - Untampered and tampered entities for each document
-    - ```entity_type.jsonl``` file for each entity type containing the following information for each entity:
+    - ```<entity_type>.jsonl``` file for each entity type containing the following information for each entity:
         - Wikidata ID
         - Wikidata label
         - Meta information used for tampering
@@ -101,9 +103,9 @@ The following command automatically downloads the text of the news articles:
 
 ```shell script
 python download_news_text.py \
-  -input <PATH/TO/dataset.jsonl> 
-  -output <PATH/TO/OUTPUT/DIRECTORY> 
-  -dataset <DATASET=[TamperedNews, News400]>
+  --input <PATH/TO/dataset.jsonl> 
+  --output <PATH/TO/OUTPUT/DIRECTORY> 
+  --dataset <DATASET=[TamperedNews, News400]>
 ``` 
 
 **Additional parameters:** Run the script with ```--debug``` to enable debugging console outputs.
@@ -117,7 +119,28 @@ file: ```dataset_with_text.jsonl```.
 as some documents might be missing due to timeouts in earlier iterations.
 
 **Known Issues:** We are aware that some Websites have changed the news content or their overall template. For this 
-reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information.  
+reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information. 
+
+### Download Images
+
+The following command automatically downloads the images of news articles or reference images for the entities found 
+in the dataset: 
+
+```shell script
+python download_images.py \
+  --input <PATH/TO/INPUT.jsonl> 
+  --output <PATH/TO/OUTPUT/DIRECTORY> 
+  --type [news, entity]
+  -dataset <DATASET=[TamperedNews, News400]>
+``` 
+
+**Additional parameters:** Run the script with ```--debug``` to enable debugging console outputs.
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+To download the news images provide the path to the  ```dataset.jsonl``` and run the script with ```--type news```.
+
+To download the references images of the entities found in dataset, please provide the path to the respective 
+```<entity_type>.jsonl``` and run the script with ```--type entity```
 
 ### Extraction of Textual Features
 
