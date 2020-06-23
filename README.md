@@ -133,7 +133,10 @@ python download_images.py \
   --type <TYPE=[news, entity]>
 ``` 
 
-**Additional parameters:** Run the script with ```--debug``` to enable debugging console outputs.
+**Additional parameters:** 
+
+Run the script with ```--debug``` to enable debugging console outputs. 
+You can set the dimension of the smaller image dimension to a maximal size using ```--size <SIZE>```.
 The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 To download the news images provide the path to the  ```dataset.jsonl``` and run the script with ```--type news```.
