@@ -66,7 +66,6 @@ def download_news_images(args):
             if image_type == 'webp':
                 fname, ext = os.path.splitext(outfile)
                 shutil.move(outfile, fname + '.webp')
-
             return True
     except urllib.error.HTTPError as err:
         logging.error(str(err.reason))
@@ -94,6 +93,8 @@ def main():
     # read urls from input file
     if args.type == "news":
         dataset = utils.read_jsonl(args.input, dict_key="id")
+        if not os.path.exists(args.output):
+            os.makedirs(args.output)
     else:
         dataset = utils.read_jsonl(args.input, dict_key="wd_id")
 
