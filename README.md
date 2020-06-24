@@ -37,7 +37,7 @@ and entity verification.
 ### 22th June 2020:
 - **Image crawler** to obtain the news and reference images.
 
-### Future Releases
+### 24th June 2020:
 - Source code for **visual feature extraction**
 
 ## Content
@@ -128,8 +128,8 @@ in the dataset:
 
 ```shell script
 python download_images.py \
-  --input <PATH/TO/INPUT.jsonl> 
-  --output <PATH/TO/OUTPUT/DIRECTORY> 
+  --input <PATH/TO/INPUT.jsonl> \
+  --output <PATH/TO/OUTPUT/DIRECTORY> \
   --type <TYPE=[news, entity]>
 ``` 
 
@@ -159,6 +159,39 @@ python calculate_word_embeddings.py \
   --fasttext <PATH/TO/fasttext_folder> \
   --output <PATH/TO/OUTPUTFILE.h5>
 ``` 
+
+### Extraction of Visual Features
+
+Please download (and unpack) the models for the utilizd descriptors and place them in the respective directories of the 
+project: 
+- ```resources/geolocation_estimation```: [model](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/base_M.tar.gz)
+- ```resources/scene_classification```: [model](http://places2.csail.mit.edu/models_places365/resnet50_places365.pth.tar)
+- ```resources/facenet```: [model](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+
+You can extract the visual features of the images downloaded according to [Download Images](#Download-Images) using:
+
+```shell script
+python calculate_image_embeddings.py \
+  --input <PATH/TO/INPUT.jsonl> \ 
+  --directory <PATH/TO/DOWNLOAD/FOLDER> \
+  --model <PATH/TO/MODEL/FOLDER \
+  --type <TYPE=[news, entity]> \
+  --output <PATH/TO/OUTPUTFILE.h5>
+``` 
+
+Please note, that the path provided with ```--directory``` needs to match the output directory specified 
+in [Download Images](#Download-Images).
+
+To generate the scene probabilities for all 365 *Places2* categories, set the flag ```--logits```
+
+**Additional parameters:** 
+Run the script with ```--debug``` to enable debugging console outputs. Set the flag ```--cpu``` to generate the 
+embeddings using a cpu.
+
+**Credits**: We thank all the original authors for their work. The corresponding GitHub repositories are linked here:
+- https://github.com/TIBHannover/GeoEstimation
+- https://github.com/CSAILVision/places365
+- https://github.com/davidsandberg/facenet
 
 ### Cross-modal Entity Consistency
 
