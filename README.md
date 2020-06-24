@@ -71,9 +71,7 @@ Based on the dataset we provide source code and config files to reproduce our re
 - [Config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml) including the
   parameters used for the experiments in the paper
 
-## Usage
-
-### Installation
+## Installation
 
 We have provided a Docker container to execute our code. You can build the container with:
 ```shell script
@@ -88,7 +86,7 @@ docker run \
 cd /src
 ```
 
-### Build Dataset
+## Build Dataset
 
 You can use the script provided in this repository to download and build the dataset: 
 ```shell script
@@ -96,6 +94,36 @@ python build_dataset.py
 ```
 This will automatically create a folder ```resources``` in the project containing the required data to execute the 
 following steps.
+
+## Reproduce Paper Results
+
+We have provided all necessary metainformation and features to reproduce the results reported in the paper. This step 
+requires to download all the dataset as described in [Build Dataset](#Build-Dataset). In case you have modified the 
+dataset paths, please specify the correct paths to the features, splits, etc. in the corresponding
+[config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml).
+
+### Entity Verification
+
+To reproduce the results for entity verification for a given entity type, please run:
+```shell script
+python inference_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
+```
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+### Context Verification
+
+To reproduce the results for context verification, please run:
+```shell script
+python inference_context.py \
+  --config test_yml/<dataset_name>_context.yml \
+  --fasttext <PATH/TO/fasttext_folder>
+```
+The number of parallel threads can be defined with: ```--threads <#THREADS>```
+
+## Build your own Models
+
+We provide code to download news texts, images, and reference images to allow building your own system based on our 
+datasets. In addition, the source code to extract textual and visual featurs used in our paper is provided.
 
 ### Download News Texts
 
@@ -192,31 +220,6 @@ embeddings using a cpu.
 - https://github.com/TIBHannover/GeoEstimation
 - https://github.com/CSAILVision/places365
 - https://github.com/davidsandberg/facenet
-
-### Cross-modal Entity Consistency
-
-This step requires to download all features and word embeddings provided in the dataset as described in 
-[Build Dataset](#Build-Dataset). In case you have modified the dataset paths, please specify the correct paths to the 
-features, splits, etc. in the corresponding
-[config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml).
-
-### Entity Verification
-
-To reproduce the results for entity verification for a given entity type, please run:
-```shell script
-python inference_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
-```
-The number of parallel threads can be defined with: ```--threads <#THREADS>```
-
-### Context Verification
-
-To reproduce the results for context verification, please run:
-```shell script
-python inference_context.py \
-  --config test_yml/<dataset_name>_context.yml \
-  --fasttext <PATH/TO/fasttext_folder>
-```
-The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 ## LICENSE
 
