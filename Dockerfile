@@ -5,6 +5,8 @@ RUN DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
 RUN apt-get install libsm6 libxext6 libxrender-dev -y
 RUN pip install --upgrade pip
+RUN pip install torch==1.5.0
+RUN pip install torchvision==0.5.0
 RUN pip install opencv-python
 RUN pip install fasttext==0.9.2
 RUN pip install h5py==2.10.0
