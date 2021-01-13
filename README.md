@@ -3,7 +3,7 @@
 This is the official GitHub page for the paper:
 
 > Eric Müller-Budack, Jonas Theiner, Sebastian Diering, Maximilian Idahl, and Ralph Ewerth. 2020. 
-Multimodal Analytics for Real-world News usingMeasures of Cross-modal Entity Consistency. 
+Multimodal Analytics for Real-world News using Measures of Cross-modal Entity Consistency. 
 In Proceedings of the *2020 International Conference on Multimedia Retrieval (ICMR ’20)*, 
 June 8–11, 2020, Dublin, Ireland. ACM, New York, NY, USA, 10 pages. 
 https://doi.org/10.1145/3372278.3390670
@@ -34,11 +34,14 @@ and entity verification.
 - **Docker container**
 - Source code for **textual feature extraction**
 
-### 22th June 2020:
+### 22nd June 2020:
 - **Image crawler** to obtain the news and reference images.
 
 ### 24th June 2020:
 - Source code for **visual feature extraction**
+
+### 13th January 2021:
+- Added instructions to run docker with GPU support 
 
 ## Content
 
@@ -83,8 +86,11 @@ docker run \
   --volume <PATH/TO/REPOSITORY>:/src \
   -u $(id -u):$(id -g) \
   -it <DOCKER_NAME> bash 
+
 cd /src
 ```
+
+Add the flag ```--gpus all``` to the ```docker run``` command to run the code on your GPUs. For detailed instructions please follow: https://wiki.archlinux.org/index.php/Docker#Run_GPU_accelerated_Docker_containers_with_NVIDIA_GPUs
 
 ## Build Dataset
 
@@ -97,8 +103,7 @@ following steps.
 
 ## Reproduce Paper Results
 
-We have provided all necessary metainformation and features to reproduce the results reported in the paper. This step 
-requires to download all the dataset as described in [Build Dataset](#Build-Dataset). In case you have modified the 
+We have provided all necessary meta information and features to reproduce the results reported in the paper. This step requires to download all the dataset as described in [Build Dataset](#Build-Dataset). In case you have modified the 
 dataset paths, please specify the correct paths to the features, splits, etc. in the corresponding
 [config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml).
 
@@ -122,8 +127,7 @@ The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 ## Build your own Models
 
-We provide code to download news texts, images, and reference images to allow building your own system based on our 
-datasets. In addition, the source code to extract textual and visual featurs used in our paper is provided.
+We provide code to download news texts, images, and reference images to allow building your own system based on our datasets. In addition, the source code to extract textual and visual features used in our paper is provided.
 
 ### Download News Texts
 
@@ -143,11 +147,10 @@ The number of parallel threads can be defined with: ```--threads <#THREADS>```
 ```<document_ID>.json```. In addition, the news texts are stored along with all other dataset information in a new 
 file: ```dataset_with_text.jsonl```.
 
-**Tip:** The script checks whether an article has already been crawled. We recommend to run the script several times 
+**Tip:** The script checks whether an article has already been crawled. We recommend running the script several times 
 as some documents might be missing due to timeouts in earlier iterations.
 
-**Known Issues:** We are aware that some Websites have changed the news content or their overall template. For this 
-reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information. 
+**Known Issues:** We are aware that some Websites have changed the news content or their overall template. For this reason, the texts can differ from our dataset. Please contact us (eric.mueller@tib.eu) for further information. 
 
 ### Download Images
 
@@ -169,7 +172,7 @@ The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 To download the news images provide the path to the  ```dataset.jsonl``` and run the script with ```--type news```.
 
-To download the references images of the entities found in dataset, please provide the path to the respective 
+To download the references images of the entities found in the dataset, please provide the path to the respective 
 ```<entity_type>.jsonl``` and run the script with ```--type entity```
 
 ### Extraction of Textual Features
@@ -213,8 +216,7 @@ in [Download Images](#Download-Images).
 To generate the scene probabilities for all 365 *Places2* categories, set the flag ```--logits```
 
 **Additional parameters:** 
-Run the script with ```--debug``` to enable debugging console outputs. Set the flag ```--cpu``` to generate the 
-embeddings using a cpu.
+Run the script with ```--debug``` to enable debugging console outputs. Set the flag ```--cpu``` to generate the embeddings using a CPU.
 
 **Credits**: We thank all the original authors for their work. The corresponding GitHub repositories are linked here:
 - https://github.com/TIBHannover/GeoEstimation
