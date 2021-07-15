@@ -67,9 +67,9 @@ This repository contains links to the *TamperedNews* ([Link](https://doi.org/10.
 
 Based on the dataset we provide source code and config files to reproduce our results:
 
-- [inference_context.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/inference_context.py)
+- [test_context.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_context.py)
   to reproduce the results for context verification
-- [inference_entities.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/inference_entities.py)
+- [test_entities.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_entities.py)
   to reproduce the results for person, location, and event verification
 - [Config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml) including the
   parameters used for the experiments in the paper
@@ -111,7 +111,7 @@ dataset paths, please specify the correct paths to the features, splits, etc. in
 
 To reproduce the results for entity verification for a given entity type, please run:
 ```shell script
-python inference_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
+python test_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
 ```
 The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
@@ -119,7 +119,7 @@ The number of parallel threads can be defined with: ```--threads <#THREADS>```
 
 To reproduce the results for context verification, please run:
 ```shell script
-python inference_context.py \
+python test_context.py \
   --config test_yml/<dataset_name>_context.yml \
   --fasttext <PATH/TO/fasttext_folder>
 ```
