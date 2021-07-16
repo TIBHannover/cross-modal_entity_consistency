@@ -43,6 +43,11 @@ and entity verification.
 ### 13th January 2021:
 - Added instructions to run docker with GPU support 
 
+### 16th July 2021:
+- Added crawler to download reference images from bing
+- Added functions for named entity recognition and linking
+- Added inference script and example ([Link](#Inference))
+
 ## Content
 
 This repository contains links to the *TamperedNews* ([Link](https://doi.org/10.25835/0002244)) and 
@@ -100,6 +105,32 @@ python build_dataset.py
 ```
 This will automatically create a folder ```resources``` in the project containing the required data to execute the 
 following steps.
+
+## Inference
+
+Please run the following command to apply the approach to a self-defined image-text pair:
+
+```shell script
+python infer.py \
+  --config <PATH/TO/config.yml \
+  --text <PATH/TO/textfile.txt> \
+  --image <PATH/TO/imagefile.jpg> \
+  --wikifier_key <YOUR_WIKIFIER_API_KEY> 
+```
+
+A Wikifier API key can be obtained by registering at http://www.wikifier.org/register.html. 
+
+You can specify the language with: ```--language [en, de]``` (```en``` is default)
+
+An image-text pair for testing and a config is provided in [examples](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/examples)
+
+```shell script
+python infer.py \
+  --config examples/config.yml \
+  --text examples/Second_inauguration_of_Barack_Obama.txt \
+  --image examples/Second_inauguration_of_Barack_Obama.jpg \
+  --wikifier_key <YOUR_WIKIFIER_API_KEY>
+```
 
 ## Reproduce Paper Results
 
