@@ -99,10 +99,21 @@ Add the flag ```--gpus all``` to the ```docker run``` command to run the code on
 
 ## Inference
 
-Please download (and unpack) the models for the utilized deep learning models and place them in the respective directories of the project: 
-- ```resources/geolocation_estimation```: [model](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/base_M.tar.gz)
-- ```resources/scene_classification```: [model](http://places2.csail.mit.edu/models_places365/resnet50_places365.pth.tar)
-- ```resources/facenet```: [model](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+Please download (and unpack) the models for the utilized deep learning models from the following links and place them in the respective directories of the project: 
+
+- ```resources```
+  - ```facenet``` [model download](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+    - ```20180402-114759.pb```
+    - ```model-20180402-114759.ckpt-275.data-00000-of-00001```
+    - ```model-20180402-114759.ckpt-275.index```
+    - ```model-20180402-114759.meta```
+  - ```geolocation_estimation``` [model download](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/base_M.tar.gz)
+    - ```cfg.json```
+    - ```model.ckpt.data-00000-of-00001```
+    - ```model.ckpt.index```
+    - ```model.ckpt.meta```
+  - ```scene_classification``` [model download](http://places2.csail.mit.edu/models_places365/resnet50_places365.pth.tar)
+    - ```resnet50_places365.pth.tar```
 
 Please run the following command to apply the approach to a self-defined image-text pair:
 
