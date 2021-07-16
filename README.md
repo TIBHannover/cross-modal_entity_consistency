@@ -97,16 +97,12 @@ cd /src
 
 Add the flag ```--gpus all``` to the ```docker run``` command to run the code on your GPUs. For detailed instructions please follow: https://wiki.archlinux.org/index.php/Docker#Run_GPU_accelerated_Docker_containers_with_NVIDIA_GPUs
 
-## Build Dataset
-
-You can use the script provided in this repository to download and build the dataset: 
-```shell script
-python build_dataset.py
-```
-This will automatically create a folder ```resources``` in the project containing the required data to execute the 
-following steps.
-
 ## Inference
+
+Please download (and unpack) the models for the utilized deep learning models and place them in the respective directories of the project: 
+- ```resources/geolocation_estimation```: [model](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/base_M.tar.gz)
+- ```resources/scene_classification```: [model](http://places2.csail.mit.edu/models_places365/resnet50_places365.pth.tar)
+- ```resources/facenet```: [model](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
 
 Please run the following command to apply the approach to a self-defined image-text pair:
 
@@ -131,6 +127,15 @@ python infer.py \
   --image examples/Second_inauguration_of_Barack_Obama.jpg \
   --wikifier_key <YOUR_WIKIFIER_API_KEY>
 ```
+
+## Build Dataset
+
+You can use the script provided in this repository to download and build the dataset: 
+```shell script
+python build_dataset.py
+```
+This will automatically create a folder ```resources``` in the project containing the required data to execute the 
+following steps.
 
 ## Reproduce Paper Results
 
@@ -224,11 +229,7 @@ python calculate_word_embeddings.py \
 
 ### Extraction of Visual Features
 
-Please download (and unpack) the models for the utilizd descriptors and place them in the respective directories of the 
-project: 
-- ```resources/geolocation_estimation```: [model](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/base_M.tar.gz)
-- ```resources/scene_classification```: [model](http://places2.csail.mit.edu/models_places365/resnet50_places365.pth.tar)
-- ```resources/facenet```: [model](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+Please download (and unpack) the models as described in [Inference](#Inference)
 
 You can extract the visual features of the images downloaded according to [Download Images](#Download-Images) using:
 
