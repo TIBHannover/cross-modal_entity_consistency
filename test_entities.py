@@ -4,13 +4,13 @@ import logging
 import multiprocessing
 import numpy as np
 import os
-from scipy.cluster.hierarchy import fclusterdata
 import sys
 import yaml
 
 # own imports
 import utils
 import metrics
+from visual_descriptors.person_embedding import agglomerative_clustering
 
 
 def parse_args():
@@ -55,9 +55,9 @@ def get_entity_features(entities, features, num_images, clustering, person_verif
         if len(feature_vectors) < 1:
             logging.warning(f"No feature vector for entity: {entity}")
 
-        if clustering:
+        if clustering and person_verification:
             if len(feature_vectors) < 2:  # no clustering necessary
-                logging.debug(f'No clustering for {entity} performed since embedding size is {len(feature_vectors)}...')
+                logging.debug(f"No clustering for {entity} performed since embedding size is {len(feature_vectors)}...")
                 entity_features[entity] = np.asarray(feature_vectors, dtype=np.float32)
             else:
                 feature_vectors = agglomerative_clustering(feature_vectors)
@@ -66,32 +66,6 @@ def get_entity_features(entities, features, num_images, clustering, person_verif
             entity_features[entity] = np.stack(feature_vectors, axis=0)
 
     return entity_features
-
-
-def agglomerative_clustering(embeddings, cluster_threshold=0.35, metric='cosine'):
-    # NOTE: evaluated optimal threshold on LFW for face recognition is cosine distance in range [-1, 1] = 0.35
-    # perform agglomerative clustering
-    clusters = fclusterdata(X=embeddings, t=cluster_threshold, criterion='distance', metric=metric)
-
-    # get majority cluster(s)
-    count = np.bincount(clusters)
-    max_clusters = [i for i, j in enumerate(count) if j == max(count)]
-
-    # get mean embedding for majority cluster(s) and return
-    filtered_dict = {}
-    for i, emb in enumerate(embeddings):
-        if clusters[i] in max_clusters:
-            if clusters[i] in filtered_dict:
-                filtered_dict[clusters[i]].append(emb)
-            else:
-                filtered_dict[clusters[i]] = [emb]
-
-    filtered_embeddings = []
-    for filtered_list in filtered_dict.values():
-        emb = np.mean(filtered_list, axis=0)
-        filtered_embeddings.append(emb)
-
-    return filtered_embeddings
 
 
 def calculate_results(x):
@@ -104,11 +78,11 @@ def calculate_results(x):
     features = config["features"]
 
     # structure is id/feature(s)
-    news_features = h5py.File(features["news_features"], 'r')
+    news_features = h5py.File(features["news_features"], "r")
 
     # structure is entity_wd_id/search_engine/feature(s)
-    untampered_features = h5py.File(features["untampered_reference_features"], 'r')
-    tampered_features = h5py.File(features["tampered_reference_features"], 'r')
+    untampered_features = h5py.File(features["untampered_reference_features"], "r")
+    tampered_features = h5py.File(features["tampered_reference_features"], "r")
 
     # get entity type
     if "persons" in config["split"]:  # Important for NOTE 1-3 in get_entity_features()
@@ -130,11 +104,13 @@ def calculate_results(x):
         else:
             features = tampered_features
 
-        entity_features = get_entity_features(entities=doc[testkey][entityset],
-                                              features=features,
-                                              num_images=config["num_images"],
-                                              clustering=config["clustering"],
-                                              person_verification=person_verification)
+        entity_features = get_entity_features(
+            entities=doc[testkey][entityset],
+            features=features,
+            num_images=config["num_images"],
+            clustering=config["clustering"],
+            person_verification=person_verification,
+        )
 
         entities_sims = []
         for entity, entity_feature in entity_features.items():
