@@ -6,7 +6,7 @@ from named_entity_linking.wikidata import get_entity_response, get_wikidata_entr
 _CUR_DIR = os.path.dirname(__file__)
 
 eventKG = set()
-with open(os.path.join(_CUR_DIR, "..", "resources", "eventKG.csv"), "r") as csvfile:
+with open(os.path.join(_CUR_DIR, "..", "eventKG", "eventKG.csv"), "r") as csvfile:
     content = csv.reader(csvfile)
     for row in content:
         eventKG.add(row[0])
