@@ -1,4 +1,3 @@
-resources*
-scene_labels*
-.git
-test_yml
+# ignore everything
+** 
+!requirements.txt
