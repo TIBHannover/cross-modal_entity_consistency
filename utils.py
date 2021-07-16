@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import re
 
 
@@ -19,7 +20,7 @@ def xpath_get(mydict, path):
 
 def read_jsonl(path, dict_key=None, keep_keys=None):
     data = []
-    with open(path, 'r') as f:
+    with open(path, "r") as f:
         for line in f:
             d = json.loads(line)
             if keep_keys is not None:
@@ -45,16 +46,16 @@ def read_split(fname):
 def postprocess_text(text):
     while True:
         # Undo mistakes while removing whitespaces
-        result = re.search(r'^(.*?)([\.\?\!\"\'“„])([A-Z\"\'“„])(.*?)$', text, re.DOTALL)
+        result = re.search(r"^(.*?)([\.\?\!\"\'“„])([A-Z\"\'“„])(.*?)$", text, re.DOTALL)
         if result:
-            text = result.group(1) + result.group(2) + ' ' + result.group(3) + result.group(4)
+            text = result.group(1) + result.group(2) + " " + result.group(3) + result.group(4)
         else:
             break
 
     while True:
-        result = re.search(r'^(.*?)([a-z]|[0-9])([A-Z])([^ ])(.*?)$', text, re.DOTALL)
+        result = re.search(r"^(.*?)([a-z]|[0-9])([A-Z])([^ ])(.*?)$", text, re.DOTALL)
         if result:
-            text = result.group(1) + result.group(2) + ' ' + result.group(3) + result.group(4) + result.group(5)
+            text = result.group(1) + result.group(2) + " " + result.group(3) + result.group(4) + result.group(5)
         else:
             break
 
@@ -62,11 +63,22 @@ def postprocess_text(text):
 
 
 def find_news_text(text):
-    results = re.match(r'^Image copyright (.*?) Image caption (.*?)\n\n(.*?)$', text, re.DOTALL)
+    results = re.match(r"^Image copyright (.*?) Image caption (.*?)\n\n(.*?)$", text, re.DOTALL)
     if results:
         image_copyright_by = results.group(1)
         image_caption = results.group(2)
         text = results.group(3)
         return image_copyright_by, image_caption, text
     else:
-        return '', '', text
+        return "", "", text
+
+
+def allowed_image_file(image_file):
+    return os.path.splitext(image_file)[1].lower() in {
+        ".png",
+        ".jpg",
+        ".jpeg",
+        ".gif",
+        ".webp",
+        ".bmp",
+    }
