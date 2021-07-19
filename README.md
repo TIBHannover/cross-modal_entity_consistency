@@ -102,6 +102,11 @@ Add the flag ```--gpus all``` to the ```docker run``` command to run the code on
 Please download (and unpack) the models for the utilized deep learning models from the following links and place them in the respective directories of the project: 
 
 - ```resources```
+  - ```event_classification``` [model download](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+    - ```models```
+      - ```VisE_CO_cos.pt```
+      - ```VisE_CO_cos.yml```
+    - ```VisE-O_refined.graphml```
   - ```facenet``` [model download](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
     - ```20180402-114759.pb```
     - ```model-20180402-114759.ckpt-275.data-00000-of-00001```
@@ -119,7 +124,7 @@ Please run the following command to apply the approach to a self-defined image-t
 
 ```shell script
 python infer.py \
-  --config <PATH/TO/config.yml \
+  --config <PATH/TO/config.yml> \
   --text <PATH/TO/textfile.txt> \
   --image <PATH/TO/imagefile.jpg> \
   --wikifier_key <YOUR_WIKIFIER_API_KEY> 
@@ -129,15 +134,24 @@ A Wikifier API key can be obtained by registering at http://www.wikifier.org/reg
 
 You can specify the language with: ```--language [en, de]``` (```en``` is default)
 
-An image-text pair for testing and a config is provided in [examples](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/examples)
+Two examples for testing and configs for the ICMR'20 and IJMIR'21 publications are provided in [examples](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/examples)
+
+An example on how to run the code can be found below:
 
 ```shell script
 python infer.py \
-  --config examples/config.yml \
+  --config examples/config_ijmir21.yml \
   --text examples/Second_inauguration_of_Barack_Obama.txt \
   --image examples/Second_inauguration_of_Barack_Obama.jpg \
   --wikifier_key <YOUR_WIKIFIER_API_KEY>
 ```
+
+We recommend using the config ```examples/config_ijmir21.yml``` of our latest approach presented in: 
+
+> Eric Müller-Budack, Jonas Theiner, Sebastian Diering, Maximilian Idahl, Sherzod Hakimov, and Ralph Ewerth. 2021. 
+Multimodal news analytics using measures of cross-modal entity and context consistency. 
+In *International Journal of Multimedia Information Retrieval* 10, 111–125 (2021). 
+https://doi.org/10.1007/s13735-021-00207-4
 
 ## Build Dataset
 
