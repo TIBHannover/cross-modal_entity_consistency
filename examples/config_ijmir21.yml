@@ -2,3 +2,7 @@ num_reference_images: 20 # maximum number of reference images from Bing
 face_clustering: true # set to true to enable the agglomerative face clustering of persons
 operator: max # operator [max, q75, q90, q95] to calculate cross-modal entity similarities (Sections 3.3 & 4.3, Table 2)
 use_cpu: true # set to true to use cpu; set to false to use gpu
+models:
+  person: resources/facenet
+  location: resources/geolocation_estimation
+  event: resources/event_classification
