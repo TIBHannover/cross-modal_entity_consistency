@@ -16,38 +16,41 @@ from utils import allowed_image_file
 from visual_descriptors.location_embedding import GeoEstimator
 from visual_descriptors.person_embedding import FacialFeatureExtractor, agglomerative_clustering
 from visual_descriptors.scene_embedding import SceneClassificator
+from visual_descriptors.event_embedding import EventClassificator
 
 
-_IMAGE_DIR = os.path.join(os.path.dirname(__file__), "reference_images")
-_RESOURCE_DIR = os.path.join(os.path.dirname(__file__), "resources")
+_CUR_DIR = os.path.dirname(__file__)
+_IMAGE_DIR = os.path.join(_CUR_DIR, "reference_images")
 
 
 class NewsAnalyzer:
     def __init__(self, wikifier_key, config):
-        if not os.path.exists(os.path.join(_RESOURCE_DIR, "facenet")):
-            logging.error("Cannot find facenet folder in resources. Please follow the README for instructions.")
+        person_model_dir = os.path.join(_CUR_DIR, config["models"]["person"])
+        location_model_dir = os.path.join(_CUR_DIR, config["models"]["location"])
+        event_model_dir = os.path.join(_CUR_DIR, config["models"]["event"])
+
+        if not os.path.exists(person_model_dir):
+            logging.error(f"Cannot find folder <{person_model_dir}>. Please follow the README for instructions.")
             sys.exit()
-        if not os.path.exists(os.path.join(_RESOURCE_DIR, "geolocation_estimation")):
-            logging.error(
-                "Cannot find geolocation_estimation folder in resources. Please follow the README for instructions."
-            )
+        if not os.path.exists(location_model_dir):
+            logging.error(f"Cannot find folder <{location_model_dir}>. Please follow the README for instructions.")
             sys.exit()
-        if not os.path.exists(os.path.join(_RESOURCE_DIR, "scene_classification")):
-            logging.error(
-                "Cannot find scene_classification folder in resources. Please follow the README for instructions"
-            )
+        if not os.path.exists(event_model_dir):
+            logging.error(f"Cannot find folder <{event_model_dir}>. Please follow the README for instructions")
             sys.exit()
 
-        logging.info("Building network for embedding based on person verification ...")
-        self.FE_face = FacialFeatureExtractor(model_path=os.path.join(_RESOURCE_DIR, "facenet"))
+        logging.info("Building network for for person verification ...")
+        self.FE_face = FacialFeatureExtractor(model_path=person_model_dir)
 
-        logging.info("Building network for embedding based on geolocation estimation ...")
-        self.FE_geo = GeoEstimator(
-            model_path=os.path.join(_RESOURCE_DIR, "geolocation_estimation"), use_cpu=config["use_cpu"]
-        )
+        logging.info("Building network for geolocation estimation ...")
+        self.FE_geo = GeoEstimator(model_path=location_model_dir, use_cpu=config["use_cpu"])
 
-        logging.info("Building network for embedding based on scene classification ...")
-        self.FE_event = SceneClassificator(model_path=os.path.join(_RESOURCE_DIR, "scene_classification"))
+        if "scene_classification" in event_model_dir:
+            logging.info("Building network for scene classification ...")
+            self.FE_event = SceneClassificator(model_path=event_model_dir)
+        else:  # use event classification approach
+            logging.info("Building network for event classification ...")
+            self.FE_event = EventClassificator(model_path=event_model_dir, use_cpu=config["use_cpu"])
 
         self.config = config
         self.wikifier_key = wikifier_key
