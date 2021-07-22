@@ -46,7 +46,7 @@ and entity verification.
 ### 16th July 2021:
 - Added crawler to download reference images from bing
 - Added functions for named entity recognition and linking
-- Added inference script and example ([Link](#Inference))
+- Added inference script and examples ([Link](#Inference))
 
 ## Content
 
@@ -152,6 +152,8 @@ We recommend using the config ```examples/config_ijmir21.yml``` of our latest ap
 Multimodal news analytics using measures of cross-modal entity and context consistency. 
 In *International Journal of Multimedia Information Retrieval* 10, 111–125 (2021). 
 https://doi.org/10.1007/s13735-021-00207-4
+
+Please note that the utilized [icrawler](https://pypi.org/project/icrawler/) currently does not support downloading reference images from *Google Images*. Instead 20 reference images from *Bing* are crawled.
 
 ## Build Dataset
 
