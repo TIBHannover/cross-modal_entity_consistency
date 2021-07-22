@@ -153,7 +153,7 @@ Multimodal news analytics using measures of cross-modal entity and context consi
 In *International Journal of Multimedia Information Retrieval* 10, 111–125 (2021). 
 https://doi.org/10.1007/s13735-021-00207-4
 
-Please note that the utilized [icrawler](https://pypi.org/project/icrawler/) currently does not support downloading reference images from *Google Images*. Instead 20 reference images from *Bing* are crawled.
+Please note that the [icrawler](https://pypi.org/project/icrawler/) used to download reference images from the web, does not currently support crawling via *Google Images*. Instead 20 reference images are retrieved from *Bing*.
 
 ## Build Dataset
 
