@@ -102,7 +102,7 @@ Add the flag ```--gpus all``` to the ```docker run``` command to run the code on
 Please download (and unpack) the models for the utilized deep learning models from the following links and place them in the respective directories of the project: 
 
 - ```resources```
-  - ```event_classification``` [model download](https://drive.google.com/open?id=1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-)
+  - ```event_classification``` [model download](https://data.uni-hannover.de/dataset/3afb333d-230f-4829-91bb-d4dd41bfdcfa/resource/b105c1aa-3bc4-4233-8103-8f4616948d85/download/vise_co_cos.tar.gz)
     - ```models```
       - ```VisE_CO_cos.pt```
       - ```VisE_CO_cos.yml```
