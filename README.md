@@ -63,7 +63,7 @@ This repository contains links to the _TamperedNews_ ([Link](https://doi.org/10.
 _News400_ ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets include:
 
 - **`<datasetname>`.tar.gz**:
-  - `dataset.jsonl` containing:
+  - `<datasetname>.jsonl` containing:
     - Web links to the news texts
     - Web links to the news image
     - Outputs of the named entity recognition and disambiguation (NERD) approach
@@ -75,8 +75,8 @@ _News400_ ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets inc
     - Web links to all reference images crawled from Google, Bing, and Wikidata
   - splits for testing and validation
 - **`<datasetname>`\_features.tar.gz**:
-  - Visual features of the news images for persons, locations, and scenes
-  - Visual features of the reference images for persons, locations, and scenes
+  - Visual features of the news images for persons, locations, and events
+  - Visual features of the reference images for persons, locations, and events
 - **`<datasetname>`\_wordembeddings.tar.gz**: Word embeddings of all nouns in the news texts
 
 Based on the dataset we provide source code and config files to reproduce our results:
