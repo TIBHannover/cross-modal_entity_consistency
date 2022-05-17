@@ -66,7 +66,7 @@ _News400_ ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets inc
 
 For both datasets _TamperedNews_ and _News400_, we provide the:
 
-- **`<dataset>.tar.gz`** containing the `<dataset>.jsonl` with:
+- **`<dataset>.tar.gz`** containing the **`<dataset>.jsonl`** with:
   - Web links to the news texts
   - Web links to the news image
   - Outputs of the named entity recognition and disambiguation (NERD) approach
@@ -82,6 +82,8 @@ For all entities detected in both datasets, we provide:
   - Meta information used for tampering
   - Web links to all reference images crawled from Google, Bing, and Wikidata
 - **`entities_features.tar.gz`** containing the visual features of the reference images for all entities
+
+The datasets can also be found here: https://doi.org/10.25835/0084897
 
 We also provide source code and config files to reproduce our results:
 
