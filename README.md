@@ -62,24 +62,28 @@ You can find the supplemental material here:
 This repository contains links to the _TamperedNews_ ([Link](https://doi.org/10.25835/0002244)) and
 _News400_ ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets include:
 
-- **`<datasetname>`.tar.gz**:
-  - `<datasetname>.jsonl` containing:
-    - Web links to the news texts
-    - Web links to the news image
-    - Outputs of the named entity recognition and disambiguation (NERD) approach
-    - Untampered and tampered entities for each document
-  - `<entity_type>.jsonl` file for each entity type containing the following information for each entity:
-    - Wikidata ID
-    - Wikidata label
-    - Meta information used for tampering
-    - Web links to all reference images crawled from Google, Bing, and Wikidata
-  - splits for testing and validation
-- **`<datasetname>`\_features.tar.gz**:
-  - Visual features of the news images for persons, locations, and events
-  - Visual features of the reference images for persons, locations, and events
-- **`<datasetname>`\_wordembeddings.tar.gz**: Word embeddings of all nouns in the news texts
+## Content
 
-Based on the dataset we provide source code and config files to reproduce our results:
+For both datasets _TamperedNews_ and _News400_, we provide the:
+
+- **`<dataset>.tar.gz`** containing the `<dataset>.jsonl` with:
+  - Web links to the news texts
+  - Web links to the news image
+  - Outputs of the named entity recognition and disambiguation (NERD) approach
+  - Untampered and tampered entities for each document
+- **`<dataset>\_features.tar.gz`** with visual features for events, locations, and persons
+- **`<dataset>\_wordembeddings.tar.gz`**: Word embeddings of all nouns in the news texts
+
+For all entities detected in both datasets, we provide:
+
+- **`entities.tar.gz`** containing an **`<entity_type>.jsonl`** for all entity types (events, locations, and persons) with:
+  - Wikidata ID
+  - Wikidata label
+  - Meta information used for tampering
+  - Web links to all reference images crawled from Google, Bing, and Wikidata
+- **`entities_features.tar.gz`** containing the visual features of the reference images for all entities
+
+We also provide source code and config files to reproduce our results:
 
 - [eval_benchmark.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/eval_benchmark.py)
   to reproduce the paper results
