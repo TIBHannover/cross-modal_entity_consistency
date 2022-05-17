@@ -44,15 +44,15 @@ def download_news_images(args):
 
     try:
         request = urllib.request.Request(
-                url=url,
-                headers={
-                    "User-Agent": (
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3)"
-                        " AppleWebKit/537.36 (KHTML, like Gecko) "
-                        "Chrome/48.0.2564.116 Safari/537.36"
-                    )
-                },
-            )
+            url=url,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3)"
+                    " AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/48.0.2564.116 Safari/537.36"
+                )
+            },
+        )
 
         with urllib.request.urlopen(request, timeout=10) as response:
             img = cv2.imdecode(np.frombuffer(response.read(), np.uint8), cv2.IMREAD_COLOR)
@@ -63,9 +63,9 @@ def download_news_images(args):
 
             cv2.imwrite(outfile, img)
             image_type = imghdr.what(outfile)
-            if image_type == 'webp':
+            if image_type == "webp":
                 fname, ext = os.path.splitext(outfile)
-                shutil.move(outfile, fname + '.webp')
+                shutil.move(outfile, fname + ".webp")
             return True
     except urllib.error.HTTPError as err:
         logging.error(str(err.reason))

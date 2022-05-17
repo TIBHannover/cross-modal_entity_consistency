@@ -22,7 +22,7 @@ You can find the supplemental material here:
 
 ### 4th June 2020:
 
-- **Full release** of the [_TamperedNews_](<(https://doi.org/10.25835/0002244)>) and
+- **Full release** of the [_TamperedNews_](https://doi.org/10.25835/0002244) and
   [_News400_](https://doi.org/10.25835/0084897) dataset including the visual and textual features used in the
   paper
 - **Inference scripts** and config files including the parameters used in the paper to reproduce the results for context
@@ -52,6 +52,11 @@ You can find the supplemental material here:
 - Added functions for named entity recognition and linking
 - Added inference script and examples ([Link](#Inference))
 
+### 17th May 2022
+
+- Release of the [updated version of both datasets _TamperedNews_ and _News400_](https://doi.org/10.25835/lzcs481w)
+- Updated code including the [_VisE_ event classification approach](https://doi.org/10.1109/WACV48630.2021.00297) according to the [IJMIR'21 paper](https://doi.org/10.1007/s13735-021-00207-4)
+
 ## Content
 
 This repository contains links to the _TamperedNews_ ([Link](https://doi.org/10.25835/0002244)) and
@@ -76,10 +81,8 @@ _News400_ ([Link](https://doi.org/10.25835/0084897)) datasets. Both datasets inc
 
 Based on the dataset we provide source code and config files to reproduce our results:
 
-- [test_context.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_context.py)
-  to reproduce the results for context verification
-- [test_entities.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_entities.py)
-  to reproduce the results for person, location, and event verification
+- [eval_benchmark.py](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/eval_benchmark.py)
+  to reproduce the paper results
 - [Config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml) including the
   parameters used for the experiments in the paper
 
@@ -141,7 +144,7 @@ A Wikifier API key can be obtained by registering at http://www.wikifier.org/reg
 
 You can specify the language with: `--language [en, de]` (`en` is default)
 
-Two examples for testing and configs for the ICMR'20 and IJMIR'21 publications are provided in [examples](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/examples)
+Two examples for testing and configs for the ICMR'20 and [IJMIR'21](https://doi.org/10.1007/s13735-021-00207-4) publications are provided in [examples](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/examples)
 
 An example on how to run the code can be found below:
 
@@ -153,12 +156,7 @@ python infer.py \
   --wikifier_key <YOUR_WIKIFIER_API_KEY>
 ```
 
-We recommend using the config `examples/config_ijmir21.yml` of our latest approach presented in:
-
-> Eric Müller-Budack, Jonas Theiner, Sebastian Diering, Maximilian Idahl, Sherzod Hakimov, and Ralph Ewerth. 2021.
-> Multimodal news analytics using measures of cross-modal entity and context consistency.
-> In _International Journal of Multimedia Information Retrieval_ 10, 111–125 (2021).
-> https://doi.org/10.1007/s13735-021-00207-4
+We recommend using the config `examples/config_ijmir21.yml` of our latest approach presented in [IJMIR'21](https://doi.org/10.1007/s13735-021-00207-4).
 
 Please note that the [icrawler](https://pypi.org/project/icrawler/) used to download reference images from the web, does not currently support crawling via _Google Images_. Instead 20 reference images are retrieved from _Bing_.
 
@@ -179,25 +177,13 @@ We have provided all necessary meta information and features to reproduce the re
 dataset paths, please specify the correct paths to the features, splits, etc. in the corresponding
 [config files](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/test_yml).
 
-### Entity Verification
-
-To reproduce the results for entity verification for a given entity type, please run:
+To reproduce the paper results, please run:
 
 ```shell script
-python test_entities.py --config test_yml/<dataset_name>_<entity_type>.yml
+python eval_benchmark.py --config test_yml/<config>.yml
 ```
 
-The number of parallel threads can be defined with: `--threads <#THREADS>`
-
-### Context Verification
-
-To reproduce the results for context verification, please run:
-
-```shell script
-python test_context.py \
-  --config test_yml/<dataset_name>_context.yml \
-  --fasttext <PATH/TO/fasttext_folder>
-```
+or use the scripts provided in the [experiments](https://github.com/TIBHannover/cross-modal_entity_consistency/blob/master/experiments) folder
 
 The number of parallel threads can be defined with: `--threads <#THREADS>`
 
@@ -292,9 +278,10 @@ Run the script with `--debug` to enable debugging console outputs. Set the flag 
 
 **Credits**: We thank all the original authors for their work. The corresponding GitHub repositories are linked here:
 
-- https://github.com/TIBHannover/GeoEstimation
 - https://github.com/CSAILVision/places365
 - https://github.com/davidsandberg/facenet
+- https://github.com/TIBHannover/GeoEstimation
+- https://github.com/TIBHannover/VisE
 
 ## LICENSE
 

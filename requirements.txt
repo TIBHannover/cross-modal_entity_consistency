@@ -5,7 +5,7 @@ imageio==2.6.1
 newspaper3k==0.2.8
 numpy==1.18.4
 opencv-python
-PyYAML==5.3.1
+PyYAML==5.4.1
 requests==2.23.0
 scikit-learn==0.23.1
 scipy==1.4.1

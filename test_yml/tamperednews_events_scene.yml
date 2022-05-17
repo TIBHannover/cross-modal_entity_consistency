@@ -1,11 +1,11 @@
 # relative paths to files provided in our dataset
-dataset: resources/news400.jsonl
-percentage: 100
-entity_type: locations
-scenes: ["indoor"] # limit test document to certain scenes in ["indoor", "natural", "urban"]
+dataset: resources/tamperednews.jsonl
+percentage: 50
+entity_type: events
+scenes: ["indoor", "natural", "urban"] # limit test document to certain scenes in ["indoor", "natural", "urban"]
 features:
-  news_features: resources/features/news400_geolocation.h5
-  entity_features: resources/features/locations_geolocation.h5
+  news_features: resources/features/tamperednews_scene.h5
+  entity_features: resources/features/events_scene.h5
 ref_images:
   sources: ["bing", "google", "wikidata"] # search engines
   num_images: 10 # maximum number of images per engine

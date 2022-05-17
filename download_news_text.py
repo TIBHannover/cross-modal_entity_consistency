@@ -17,12 +17,14 @@ def parse_args():
     parser.add_argument("-i", "--input", type=str, required=True, help="path to dataset.jsonl")
     parser.add_argument("-o", "--output", type=str, required=True, help="path to output directory")
 
-    parser.add_argument("-d",
-                        "--dataset",
-                        type=str,
-                        required=True,
-                        choices=["News400", "TamperedNews"],
-                        help="select dataset to process")
+    parser.add_argument(
+        "-d",
+        "--dataset",
+        type=str,
+        required=True,
+        choices=["News400", "TamperedNews"],
+        help="select dataset to process",
+    )
 
     parser.add_argument("-t", "--threads", type=int, default=8, required=False, help="number of downloader threads")
 
@@ -49,20 +51,20 @@ def download_news_text(args):
         article.parse()
 
         # write text
-        with open(outfile, 'w') as f:
+        with open(outfile, "w") as f:
             if language == "de":  # NOTE: News400 texts were postprocessed in our project
                 news_text = article.text.replace("\t", " ")
-                with open(os.path.splitext(outfile)[0] + "_text.txt", 'w') as txtfile:
+                with open(os.path.splitext(outfile)[0] + "_text.txt", "w") as txtfile:
                     for line in news_text.split("\n"):
                         txtfile.writelines(line)
 
             data = {
-                'title': article.title,
-                'authors': article.authors,
-                'text': article.text,
-                'description': article.meta_description,
-                'keywords': article.meta_keywords,
-                'summary': article.summary
+                "title": article.title,
+                "authors": article.authors,
+                "text": article.text,
+                "description": article.meta_description,
+                "keywords": article.meta_keywords,
+                "summary": article.summary,
             }
 
             json.dump(data, f)
@@ -70,7 +72,7 @@ def download_news_text(args):
         return
 
     except Exception as e:
-        logging.warning(f'Could not download news text from: {url}')
+        logging.warning(f"Could not download news text from: {url}")
         logging.warning(e)
 
         # deleting output file if created but not processed successfully
@@ -135,7 +137,7 @@ def main():
 
                 if args.dataset == "News400":
                     # NOTE: News400 texts were postprocessed in our project
-                    with open(os.path.splitext(txt_file)[0] + '_text.txt', 'r') as txt_file:
+                    with open(os.path.splitext(txt_file)[0] + "_text.txt", "r") as txt_file:
                         news_text = txt_file.read()
                     news_text = utils.postprocess_text(news_text)
 

@@ -5,18 +5,18 @@ from sklearn import metrics
 
 
 def cossim(f1, f2):
-    cos_dist = sp.distance.cdist(f1, f2, 'cosine')  # 0 equal, 2 different
+    cos_dist = sp.distance.cdist(f1, f2, "cosine")  # 0 equal, 2 different
     norm_cos_dist = cos_dist / 2.0  # 0 equal, 1 different
     return 1 - norm_cos_dist  # 1 equal, 0 different
 
 
 def calculate_metrics(testset_similarities):
-    true_labels = np.ones(len(testset_similarities['untampered']), dtype=int)
-    true_similarities = np.asarray(testset_similarities['untampered'], dtype=np.float32)
+    true_labels = np.ones(len(testset_similarities["untampered"]), dtype=int)
+    true_similarities = np.asarray(testset_similarities["untampered"], dtype=np.float32)
 
     results = {}
     for key in testset_similarities:
-        if key == 'untampered':
+        if key == "untampered":
             continue
 
         false_labels = np.zeros(len(testset_similarities[key]), dtype=int)
@@ -35,14 +35,14 @@ def calculate_metrics(testset_similarities):
                 cnt_ranking_correct += 1
 
         results[key] = {
-            'first_rank_percentage': cnt_ranking_correct / len(true_similarities),
-            'auc': auc_untamp,
-            'AP_at25R_untampered': ap_at_kperc_recall(labels, similarities, 0.25),
-            'AP_at50R_untampered': ap_at_kperc_recall(labels, similarities, 0.5),
-            'AP_at100R_untampered': ap_at_kperc_recall(labels, similarities, 1),
-            'AP_at25R_tampered': ap_at_kperc_recall(labels, similarities, 0.25, gt_label=0),
-            'AP_at50R_tampered': ap_at_kperc_recall(labels, similarities, 0.5, gt_label=0),
-            'AP_at100R_tampered': ap_at_kperc_recall(labels, similarities, 1, gt_label=0)
+            "first_rank_percentage": cnt_ranking_correct / len(true_similarities),
+            "auc": auc_untamp,
+            "AP_at25R_untampered": ap_at_kperc_recall(labels, similarities, 0.25),
+            "AP_at50R_untampered": ap_at_kperc_recall(labels, similarities, 0.5),
+            "AP_at100R_untampered": ap_at_kperc_recall(labels, similarities, 1),
+            "AP_at25R_tampered": ap_at_kperc_recall(labels, similarities, 0.25, gt_label=0),
+            "AP_at50R_tampered": ap_at_kperc_recall(labels, similarities, 0.5, gt_label=0),
+            "AP_at100R_tampered": ap_at_kperc_recall(labels, similarities, 1, gt_label=0),
         }
 
     return results
@@ -58,7 +58,7 @@ def ap_at_kperc_recall(labels, similarities, kperc, gt_label=1):
 
     relevant_docs = int(0.5 + np.sum(np.equal(labels_sorted, gt_label)) * kperc)
     if relevant_docs < 1:
-        logging.warning(f'Not enough relevant documents for kperc = {kperc}')
+        logging.warning(f"Not enough relevant documents for kperc = {kperc}")
         return [0, 0]
 
     cnt_correct = 0

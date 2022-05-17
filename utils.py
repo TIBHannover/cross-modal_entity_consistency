@@ -43,6 +43,29 @@ def read_split(fname):
     return test_doc_ids
 
 
+def generate_testset(dataset, entity_type, scenes):
+    anno_key = "annotation_" + entity_type
+    testkey = "test_" + entity_type
+
+    test_docs = {}
+    for doc in dataset:
+        # check if document contains entities of the given type
+        if len(dataset[doc][testkey]["untampered"]) < 1:
+            continue
+
+        # check if the scene of the document matches the specified test setup
+        if dataset[doc]["scene_label"] not in scenes:
+            continue
+
+        if anno_key in dataset[doc].keys():  # check if annotation exists
+            if dataset[doc][anno_key] == 1:  # only consider positive (value=1) documents
+                test_docs[doc] = dataset[doc]
+        else:  # if no annotation consider all documents
+            test_docs[doc] = dataset[doc]
+
+    return test_docs
+
+
 def postprocess_text(text):
     while True:
         # Undo mistakes while removing whitespaces

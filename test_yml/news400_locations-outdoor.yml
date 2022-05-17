@@ -1,10 +1,13 @@
 # relative paths to files provided in our dataset
-dataset: resources/news400/dataset.jsonl
-split: resources/news400/splits/locations_outdoor_100perc_test.csv
+dataset: resources/news400.jsonl
+percentage: 100
+entity_type: locations
+scenes: ["natural", "urban"] # limit test document to certain scenes in ["indoor", "natural", "urban"]
 features:
-  news_features: resources/news400/features/news_geolocation.h5
-  untampered_reference_features: resources/news400/features/reference_geolocation.h5
-  tampered_reference_features: resources/tamperednews/features/reference_geolocation.h5  # entities from tamperednews
-num_images: 10     # maximum number of images per engine
-clustering: false  # clustering on features of reference images
-operator: max      # operator [max, q75, q90, q95] to calculate cross-modal entity similarities (Sections 3.3 & 4.3, Table 2)
+  news_features: resources/features/news400_geolocation.h5
+  entity_features: resources/features/locations_geolocation.h5
+ref_images:
+  sources: ["bing", "google", "wikidata"] # search engines
+  num_images: 10 # maximum number of images per engine
+clustering: false # clustering on features of reference images
+operator: max # operator [max, q75, q90, q95] to calculate cross-modal entity similarities (Sections 3.3 & 4.3, Table 2)

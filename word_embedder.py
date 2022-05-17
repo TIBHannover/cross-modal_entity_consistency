@@ -6,16 +6,15 @@ import spacy
 
 
 class WordEmbedder:
-
-    def __init__(self, fasttext_bin_folder, token_types=['NOUN'], language='en'):
-        logging.info(f'Loading NER model: {language} ...')
+    def __init__(self, fasttext_bin_folder, token_types=["NOUN"], language="en"):
+        logging.info(f"Loading NER model: {language} ...")
         if language == "en":
             self._nlp = spacy.load("en_core_web_sm")
         elif language == "de":
             self._nlp = spacy.load("de_core_news_sm")
 
-        logging.info(f'Loading word2vec model: cc.{language}.300.bin ...')
-        self._word2vec = fasttext.load_model(os.path.join(fasttext_bin_folder, 'cc.' + language + '.300.bin'))
+        logging.info(f"Loading word2vec model: cc.{language}.300.bin ...")
+        self._word2vec = fasttext.load_model(os.path.join(fasttext_bin_folder, "cc." + language + ".300.bin"))
         self._token_types = token_types
 
     def _preprocess(self, text):
