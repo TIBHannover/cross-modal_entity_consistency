@@ -6,7 +6,7 @@ newspaper3k==0.2.8
 numpy==1.18.4
 opencv-python
 PyYAML==5.4.1
-requests==2.23.0
+requests==2.31.0
 scikit-learn==0.23.1
 scipy==1.4.1
 spacy==2.2.4
